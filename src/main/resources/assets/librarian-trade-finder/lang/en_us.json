@@ -43,5 +43,10 @@
     "tradefinderui.enchantments.price.tooltip.title": "Set the maximum price for this enchantment.",
     "tradefinderui.enchantments.level.tooltip": "Set the level for this enchantment.",
     "tradefinderui.enchantments.price.name": "Max Price",
-    "tradefinderui.enchantments.level.name": "Level"
+    "tradefinderui.enchantments.level.name": "Level",
+    "tradefinderui.enchantments.odds": "%s · ~%s tries",
+    "tradefinderui.enchantments.odds.tooltip.title": "Chance per lectern reset · average tries",
+    "tradefinderui.enchantments.odds.tooltip.1": "Chance that a reset librarian offers this book",
+    "tradefinderui.enchantments.odds.tooltip.2": "at or above your level and at or below your max price.",
+    "tradefinderui.enchantments.total": "Total: %s · ~%s tries"
 }

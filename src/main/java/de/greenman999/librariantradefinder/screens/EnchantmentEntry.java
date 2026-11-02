@@ -2,6 +2,7 @@ package de.greenman999.librariantradefinder.screens;
 
 import de.greenman999.librariantradefinder.LibrarianTradeFinder;
 import de.greenman999.librariantradefinder.config.TradeFinderConfig;
+import de.greenman999.librariantradefinder.util.TradeOdds;
 import org.joml.Matrix3x2fStack;
 
 import java.util.List;
@@ -92,6 +93,13 @@ public class EnchantmentEntry extends AbstractSelectionList.Entry<EnchantmentEnt
 
         context.text(textRenderer, enchantmentText, 8, y + 4, 0xFFFFFFFF);
 
+        double chance = TradeOdds.chance(enchantmentOption);
+        Component oddsText = Component.translatable("tradefinderui.enchantments.odds",
+                TradeOdds.formatChance(chance), TradeOdds.formatTries(chance));
+        int oddsRight = enabled ? levelX - 23 - 4 : x + entryWidth - 4;
+        int oddsX = oddsRight - textRenderer.width(oddsText);
+        context.text(textRenderer, oddsText, oddsX, y + 4, enabled ? 0xFFE0E0E0 : 0xFFA0A0A0);
+
         matrices.pushMatrix();
         matrices.translate(0, 0);
         maxPriceField.setX(maxPriceX);
@@ -119,6 +127,11 @@ public class EnchantmentEntry extends AbstractSelectionList.Entry<EnchantmentEnt
                     Component.translatable("tradefinderui.enchantments.price.tooltip.3").withStyle(ChatFormatting.GRAY),
                     Component.translatable("tradefinderui.enchantments.price.tooltip.4").withStyle(ChatFormatting.GRAY),
                     Component.translatable("tradefinderui.enchantments.price.tooltip.5").withStyle(ChatFormatting.GRAY)), mouseX, y + 32);
+        }
+        if(mouseX >= oddsX && mouseX <= oddsRight && mouseY > y && mouseY < y + entryHeight - 4) {
+            context.setComponentTooltipForNextFrame(Minecraft.getInstance().font, List.of(Component.translatable("tradefinderui.enchantments.odds.tooltip.title").withStyle(ChatFormatting.GREEN),
+                    Component.translatable("tradefinderui.enchantments.odds.tooltip.1").withStyle(ChatFormatting.GRAY),
+                    Component.translatable("tradefinderui.enchantments.odds.tooltip.2").withStyle(ChatFormatting.GRAY)), mouseX, y + 32);
         }
         if(mouseX > x + entryWidth - 21 - 15 - 14 - 23 - 2 && mouseX < x + entryWidth - 21 - 15 - 14 - 2 && mouseY > y && mouseY < y + entryHeight && enabled && !maxPriceField.canConsumeInput()) {
             context.setComponentTooltipForNextFrame(Minecraft.getInstance().font, List.of(Component.translatable("tradefinderui.enchantments.level.tooltip").withStyle(ChatFormatting.GREEN)), mouseX, y + 32);

@@ -2,6 +2,7 @@ package de.greenman999.librariantradefinder.screens;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import de.greenman999.librariantradefinder.LibrarianTradeFinder;
+import de.greenman999.librariantradefinder.util.TradeOdds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractSelectionList;
@@ -46,6 +47,11 @@ public class EnchantmentsListWidget extends AbstractSelectionList<EnchantmentEnt
         this.setSelected(null);
         context.fill(5, 5, this.width + 5, 20, 0xAFC7C0C0);
         context.text(Minecraft.getInstance().font, Component.translatable("tradefinderui.enchantments.title"), 9, 9, 0xFFFFFFFF);
+
+        double totalChance = TradeOdds.totalChance();
+        Component totalText = Component.translatable("tradefinderui.enchantments.total",
+                TradeOdds.formatChance(totalChance), TradeOdds.formatTries(totalChance));
+        context.text(Minecraft.getInstance().font, totalText, this.width - 50 - Minecraft.getInstance().font.width(totalText), 9, 0xFFFFFF55);
     }
 
     @Override
